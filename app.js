@@ -78,7 +78,7 @@ function preparePrint() {
  document.querySelectorAll("details").forEach(detail => { detail.dataset.wasOpen = String(detail.open); detail.open = true; });
  document.getElementById('print-content').innerHTML = '<h2>知识节点与溯源</h2>' + nodes.map(n => `<article><h3>${esc(n.id)} ${esc(n.title)}</h3><p>${esc(n.mechanism)}</p><p>${esc(n.morph)}</p><p>${esc(n.clinic)}</p><p>辨析提醒　${esc(n.pitfall)}</p><p>来源　${n.sources.map(id => { const source = sources.find(s => s[0] === id); return esc(source[1]) + ' ' + esc(source[2]); }).join('；')}</p></article>`).join('');
 }
-document.getElementById('print').onclick = () => { preparePrint(); window.print(); };
+document.getElementById('print').onclick = () => window.print();
 window.addEventListener('beforeprint', preparePrint);
 
 window.addEventListener("afterprint", () => { document.querySelectorAll("details[data-was-open]").forEach(detail => { detail.open = detail.dataset.wasOpen === "true"; delete detail.dataset.wasOpen; }); });
